@@ -133,6 +133,7 @@ class Birthday(Field):
     @Field.value.setter
     def value(self, value):
         self.__value = datetime.strptime(value, '%d.%m.%Y').date()
+        Field.value.fset(self, value)
 
     def __str__(self) -> str:
         return datetime.strftime(self.__value, '%d.%m.%Y')
