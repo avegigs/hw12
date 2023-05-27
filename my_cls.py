@@ -132,7 +132,10 @@ class Birthday(Field):
 
     @Field.value.setter
     def value(self, value):
-        self.__value = datetime.strptime(value, '%d.%m.%Y').date()
+        try:
+            self.__value = datetime.strptime(value, '%d.%m.%Y').date()
+        except ValueError:
+            raise Exception("Invalid birthday. Only string format dd.mm.yyyy")
         Field.value.fset(self, value)
 
     def __str__(self) -> str:
